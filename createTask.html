@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Task</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #B2C3B9;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .topnav {
+            background-color: #09090937;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+
+        .content {
+            text-align: left;
+            padding: 40px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            margin: 20px auto;
+            border-radius: 8px;
+        }
+
+        .textbox {
+            margin-bottom: 20px;
+        }
+
+        .textbox label {
+            display: block;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .textbox input[type="text"],
+        .textbox input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .success-message {
+            color: green;
+            margin-top: 10px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="topnav">
+        <a href="admin.html" style="text-decoration: none; color: white;">Back</a>
+        <a>Create Task</a>
+    </div>
+
+    <div class="content">
+        <h1>Create Task</h1>
+
+        <div class="textbox">
+            <label for="taskID">Task ID</label>
+            <input type="text" id="taskID" placeholder="Enter Task ID">
+        </div>
+        <div class="textbox">
+            <label for="taskDes">Task Description</label>
+            <input type="text" id="taskDes" placeholder="Task Description">
+        </div>
+        <div class="textbox">
+            <label for="AuditArea">Audit Area</label>
+            <input type="text" id="AuditArea" placeholder="Audit Area">
+        </div>
+        <div class="textbox">
+            <label for="AuditorID">Auditor ID</label>
+            <input type="text" id="AuditorID" placeholder="Enter Auditor ID">
+        </div>
+        <div class="textbox">
+            <label for="AuditorName">Auditor Name</label>
+            <input type="text" id="AuditorName" placeholder="Enter Auditor Name">
+        </div>
+        <div class="textbox">
+            <label for="Deadline">Deadline</label>
+            <input type="date" id="Deadline" placeholder="Select the date">
+        </div>
+
+        <button id="submitBtn" onclick="submitForm()">Create Task</button>
+        <p class="success-message" id="successMessage" style="display: none;">Task Created Successfully!</p>
+        <p class="error-message" id="errorMessage" style="display: none;">Please fill in all fields.</p>
+    </div>
+
+    <script>
+        function submitForm() {
+            var taskID = document.getElementById("taskID").value;
+            var taskDes = document.getElementById("taskDes").value;
+            var AuditArea = document.getElementById("AuditArea").value;
+            var AuditorID = document.getElementById("AuditorID").value;
+            var AuditorName = document.getElementById("AuditorName").value;
+            var Deadline = document.getElementById("Deadline").value;
+
+            if (taskID.trim() === '' || taskDes.trim() === '' || AuditArea.trim() === '' || AuditorID.trim() === '' || AuditorName.trim() === '' || Deadline.trim() === '') {
+                document.getElementById("errorMessage").style.display = "block";
+                return;
+            }
+
+            // Retrieve existing tasks from localStorage
+            var tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+            // Add new task to the array
+            var newTask = { taskID, taskDes, AuditArea, AuditorID, AuditorName, Deadline };
+            tasks.push(newTask);
+
+            // Save updated tasks array back to localStorage
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+
+            // Save the newly created task to localStorage for display in the next page
+            localStorage.setItem("newTask", JSON.stringify(newTask));
+
+            // Redirect to the createdTask.html page
+            window.location.href = "createdTask.html";
+        }
+    </script>
+</body>
+</html>

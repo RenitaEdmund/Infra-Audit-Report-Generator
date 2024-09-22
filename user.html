@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>User Page</title>
+
+  
+
+  <style>
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  position: relative;
+  background-color: #B2C3B9; /* Set the background color to cover the entire screen */
+  min-height: 100vh; /* Set a minimum height to cover the entire viewport */
+}
+
+    .topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 20px;
+  background-color: #21392b4a;
+  color: #ffffff;
+}
+
+.sidenav {
+  height: 100vh;
+  width: 200px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #09090937;
+  overflow-x: hidden;
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column; /* Display the navigation links in a column layout */
+  align-items: center; /* Center align the navigation links */
+}
+
+.sidenav a {
+  padding: 10px; /* Adjust padding for equal spacing */
+  text-decoration: none;
+  font-size: 18px;
+  color: #f6f4f4;
+  display: block;
+  width: 100%; /* Expand the links to full width for equal spacing */
+  text-align: center; /* Center align the text within the links */
+  transition: background-color 0.3s; /* Add a smooth transition for background color changes */
+}
+
+.sidenav a:hover {
+  background-color: #09090937; /* Change background color on hover for better visual feedback */
+}
+
+.profile-block {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border: #000000 solid thin;
+  border-radius: 50%;
+  /* Updated styles to add a circular profile image in the profile block */
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+}
+
+.profile-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-size: cover;
+}
+
+    .search {
+      flex: 1;
+      text-align: right;
+      margin-right: 20px;
+    }
+
+    main {
+      margin-left: 200px;
+      padding-top: 50px;
+      padding-left: 20px;
+      background-color: #B2C3B9;
+    }
+
+    .welcome-message {
+  text-align: center;
+  margin: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(220, 4, 4, 0.881);
+}
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="profile-block">
+      
+        <div class="profile-icon" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHvZ0pbf4bXvAJgVZVuRQqrNWnoWl96cV6wQ&s')"></div>
+    
+    
+      
+    </div>
+    <div class="search">
+      <input type="text" placeholder="Search...">
+    </div>
+  </div>
+
+  <div class="sidenav">
+    
+    <a href="assignedTaskUser.html">Assigned Tasks</a>
+    <a href="#workStatus">Update Work Status</a>
+    <a href="auditor_list_User.html">Auditor Details</a>
+    <a href="forms_user.html">Forms</a>
+    <a href="index.html" class="logout-button">Logout</a> 
+  </div>
+
+  <main>  
+    <section id="welcome-box">
+      <div class="welcome-message-box">
+        <h2>Welcome User!</h2>
+        <p>Thank you for visiting our website. We hope you enjoy your time here.</p>
+      </div>
+    </section>
+  </main>
+
+</body>
+
+</html>
