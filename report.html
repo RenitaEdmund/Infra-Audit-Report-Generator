@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audit Report</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            background-color: #ffffff;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #333;
+        }
+
+        .header button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .header button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .footer {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .footer button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .footer button:hover {
+            background-color: #45a049;
+        }
+
+        .back-button {
+            margin-top: 20px;
+        }
+
+        .back-button a {
+            text-decoration: none;
+            background-color: #555;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .back-button a:hover {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Audit Report</h1>
+            <button onclick="downloadPDF()">Download as PDF</button>
+        </div>
+        <table id="reportTable">
+            <thead>
+                <tr>
+                    <th>Task ID</th>
+                    <th>Audit Area</th>
+                    <th>Auditor ID</th>
+                    <th>Auditor Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be dynamically inserted here -->
+            </tbody>
+        </table>
+        <div class="back-button">
+            <a href="admin.html">Back</a>
+        </div>
+    </div>
+
+    <!-- Include the html2pdf library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+            var reportTable = document.getElementById("reportTable").getElementsByTagName("tbody")[0];
+
+            tasks.forEach(function(task) {
+                var row = reportTable.insertRow();
+
+                row.insertCell(0).innerText = task.taskID;
+                row.insertCell(1).innerText = task.AuditArea;
+                row.insertCell(2).innerText = task.AuditorID;
+                row.insertCell(3).innerText = task.AuditorName;
+                row.insertCell(4).innerText = task.Status || 'Pending'; // Must be got from the user side...Implementaion using Django only
+            });
+        });
+
+        function downloadPDF() {
+            const element = document.querySelector('.container');
+            html2pdf()
+                .from(element)
+                .save('audit_report.pdf');
+        }
+    </script>
+</body>
+</html>
